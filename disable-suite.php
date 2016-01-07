@@ -152,8 +152,8 @@ class DisableSuite {
 	}
 
 	/**
-		* Update Option
-		*/
+	 * Update Option
+	 */
 	public function save_checked( $post_value ) {
 		if( isset( $_POST['action'] ) && $_POST['action'] == 'update' ) {
 			$this->$post_value = $_POST[ $post_value ];
