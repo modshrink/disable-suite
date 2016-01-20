@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: Disable Suite
-Plugin URI: https://github.com/
-Description: All your function are disable to us.
+Plugin URI: https://github.com/modshrink/disable-suite
+Description: Disable some of WordPress feature.
 Version: 0.1
 Author: modshrink
 Author URI: http://www.modshrink.com/
@@ -10,7 +10,7 @@ Text Domain: disable-suite
 Domain Path: /languages
 License: GPL2
 
-Copyright 2015	modshrink	(email : hello@modshrink.com)
+Copyright 2015 modshrink (email : hello@modshrink.com)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as

@@ -1,1 +1,3 @@
-<?php // toki wa kane nari
+<?php
+// Silence is golden.
+
