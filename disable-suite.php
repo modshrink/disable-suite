@@ -29,18 +29,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	02110-1301	USA
 $DisableSuite = new DisableSuite();
 
 class DisableSuite {
-
-	public $bool;
-	public $ds_meta_generator;
-	public $ds_author_archive;
-	public $ds_xmlrpc;
-	public $ds_emoji;
-	public $ds_comment_form;
-	public $ds_revision;
-	public $checked;
-	public $methods;
-	public $num;
-
 	/**
 	 * Construnt
 	 */
