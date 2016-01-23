@@ -60,7 +60,7 @@ class DisableSuite {
 		}
 
 		if( get_option( 'ds_author_archive' ) ) {
-			add_action( 'template_redirect', array( &$this,'disable_author_archive' ) );
+			add_action( 'query_vars', array( &$this,'disable_author_archive' ) );
 		}
 
 		if( get_option( 'ds_comment_form' ) ) {
@@ -163,11 +163,15 @@ class DisableSuite {
 	/**
 	 * Disable author archive
 	 */
-	public function disable_author_archive() {
-		if ( is_author() ) :
-			wp_redirect( home_url() );
-			exit;
-		endif;
+	public function disable_author_archive( $query_vars ) {
+		$disable_var = array( 'author', 'author_name' );
+		$query_vars = array_diff( $query_vars, $disable_var );
+		return $query_vars;
+
+//		if ( is_author() ) :
+//			wp_redirect( home_url() );
+//			exit;
+//		endif;
 	}
 
 	/**
