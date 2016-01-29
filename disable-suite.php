@@ -29,9 +29,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	02110-1301	USA
 $DisableSuite = new DisableSuite();
 
 class DisableSuite {
-	/**
-	 * Construnt
-	 */
 	public function __construct() {
 		// Text Domain
 		load_plugin_textdomain( 'disable-suite', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
@@ -74,22 +71,7 @@ class DisableSuite {
 		if( get_option( 'ds_revision' ) ) {
 			add_action( 'init', array( &$this,'disable_revision' ) );
 		}
-	} //end constructor
-
-	/**
-	 * Display when it is activated in WordPress 3.8 or lower.
-	 */
-	public function notice() { ?>
-		<div class="updated">
-			<p><?php printf( __( '%s is not working.', 'shortcode-star-rating' ), '<strong>Shortcode Star Raging</strong>', 'shortcode-star-rating' ); ?></p>
-			<p><?php
-				_e( 'This plugin require the <strong>WordPress 3.8 or higher</strong>.', 'shortcode-star-rating' );
-				printf( __( ' Your WordPress version is %s.', 'shortcode-star-rating' ), get_bloginfo('version') );
-				echo ' <a href="?deactivatePluginKey=1">' . __( ' Deactivate Now', 'shortcode-star-rating' ) . '</a>';
-			 ?></p>
-		</div>
-	<?php
-	}
+	} 
 
 	/**
 	 * Plugin Deactivated from Update Message Box.
