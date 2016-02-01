@@ -132,7 +132,6 @@ class DisableSuite {
 			} else {
 				$this->bool = '';
 			}
-			var_dump($this->bool);
 			update_option( $post_value, $this->bool );
 		}
 
@@ -207,8 +206,9 @@ class DisableSuite {
 	<form method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 		<?php wp_nonce_field('update-options'); ?>
 
-		<table class="form-table">
+		<h2>Disable</h2>
 
+		<table class="form-table">
 			<tr valign="top">
 				<th scope="row"><?php _e( 'Meta generator', 'disable-suite' ); ?></th>
 				<td>
@@ -260,6 +260,15 @@ class DisableSuite {
 					<input type="checkbox" id ="ds_revision" name="ds_revision" value="1"<?php echo $this->checked_ds_revision; ?> />
 					<label for="ds_revision"><?php _e( 'disable', 'disable-suite' ); ?></label>
 					<p class="description"><?php _e( 'Disable post revisions.', 'disable-suite' ); ?></p>
+				</td>
+			</tr>
+
+			<tr valign="top">
+				<th scope="row"><?php _e( 'All Transient', 'disable-suite' ); ?></th>
+				<td>
+					<input type="checkbox" id ="ds_all_transient" name="ds_all_transient" value="1"<?php echo $this->checked_ds_all_transient; ?> />
+					<label for="ds_all_transient"><?php _e( 'disable', 'disable-suite' ); ?></label>
+					<p class="description"><?php _e( 'Delete all transient cache.', 'disable-suite' ); ?></p>
 				</td>
 			</tr>
 
