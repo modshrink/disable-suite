@@ -190,10 +190,13 @@ class DisableSuite {
 	/**
 	 * Delete all transient
 	 */
-$sql = "SELECT *
+
+	public function delete_all_transient() {
+$sql = "SELECT * FROM wp_options
 FROM wp_options
 WHERE `option_name`
 LIKE ('%\_transient\_%')";
+	}
 
 	/**
 	 * Add admin menu.
