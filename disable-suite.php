@@ -35,7 +35,7 @@ class DisableSuite {
 
 		// Plugin Activation
 		if ( function_exists( 'register_activation_hook' ) ) {
-			register_activation_hook( __FILE__, array(&$this, 'activationHook') );
+			register_activation_hook( __FILE__, array( $this, 'activationHook') );
 		}
 
 		// Plugin Uninstall
@@ -43,33 +43,27 @@ class DisableSuite {
 			register_uninstall_hook( __FILE__, 'DisableSuite::uninstallHook');
 		}
 
-	 // Version Check
-		global $wp_version;
-		if( version_compare( $wp_version, '3.8', '<' ) ) {
-			add_action( 'admin_notices', array(&$this, 'notice') );
-		}
-
-		add_action( 'admin_init', array(&$this, 'pluginDeactivate') );
-		add_action( 'admin_menu', array(&$this, 'add_pages') );
+		add_action( 'admin_init', array( $this, 'pluginDeactivate' ) );
+		add_action( 'admin_menu', array( $this, 'add_pages' ) );
 
 		if( get_option( 'ds_meta_generator' ) ) {
 			remove_action( 'wp_head', 'wp_generator' );
 		}
 
 		if( get_option( 'ds_author_archive' ) ) {
-			add_action( 'query_vars', array( &$this,'disable_author_archive' ) );
+			add_action( 'query_vars', array( $this,'disable_author_archive' ) );
 		}
 
 		if( get_option( 'ds_comment_form' ) ) {
-			add_action( 'template_redirect', array( &$this,'disable_all_comment_form' ) );
+			add_action( 'template_redirect', array( $this,'disable_all_comment_form' ) );
 		}
 
 		if( get_option( 'ds_xmlrpc' ) ) {
-			add_action( 'init', array( &$this,'disable_xml_rpc' ) );
+			add_action( 'init', array( $this,'disable_xml_rpc' ) );
 		}
 
 		if( get_option( 'ds_revision' ) ) {
-			add_action( 'init', array( &$this,'disable_revision' ) );
+			add_action( 'init', array( $this,'disable_revision' ) );
 		}
 	} 
 
@@ -79,8 +73,8 @@ class DisableSuite {
 	public function pluginDeactivate() {
 		if( is_plugin_active( 'disable-suite/disable-suite.php' ) && isset( $_GET['deactivatePluginKey'] ) ) {
 			deactivate_plugins( 'disable-suite/disable-suite.php' );
-			remove_action( 'admin_notices', array( &$this, 'notice' ) );
-			add_action( 'admin_notices', array( &$this, 'pluginDeactivateMessage' ) );
+			remove_action( 'admin_notices', array( $this, 'notice' ) );
+			add_action( 'admin_notices', array( $this, 'pluginDeactivateMessage' ) );
 		}
 	}
 
@@ -159,7 +153,7 @@ class DisableSuite {
 	 * Disable all comment form
 	 */
 	public function disable_all_comment_form() {
-		add_filter( 'comments_open', array( &$this, '__return_false' ) );
+		add_filter( 'comments_open', array( $this, '__return_false' ) );
 	}
 
 	/**
@@ -171,31 +165,20 @@ class DisableSuite {
 	}
 
 	public function disable_xml_rpc() {
-		add_filter( 'xmlrpc_methods', array( &$this, 'remove_xmlrpc_pingback_ping' ) );
-		add_filter( 'xmlrpc_enabled', array( &$this, '__return_false' ) );
+		add_filter( 'xmlrpc_methods', array( $this, 'remove_xmlrpc_pingback_ping' ) );
+		add_filter( 'xmlrpc_enabled', array( $this, '__return_false' ) );
 	}
 
 	/**
 	 * Disable post revisions
 	 */
 	public function disable_revision() {
-		add_filter( 'wp_revisions_to_keep', array( &$this, 'disable_revision_count' ), 999, 2 );
+		add_filter( 'wp_revisions_to_keep', array( $this, 'disable_revision_count' ), 999, 2 );
 	}
 
 	public function disable_revision_count( $num, $post ) {
 		$num = 0;
 		return $num;
-	}
-
-	/**
-	 * Delete all transient
-	 */
-
-	public function delete_all_transient() {
-$sql = "SELECT * FROM wp_options
-FROM wp_options
-WHERE `option_name`
-LIKE ('%\_transient\_%')";
 	}
 
 	/**
@@ -270,15 +253,6 @@ LIKE ('%\_transient\_%')";
 					<input type="checkbox" id ="ds_revision" name="ds_revision" value="1"<?php echo $this->checked_ds_revision; ?> />
 					<label for="ds_revision"><?php _e( 'disable', 'disable-suite' ); ?></label>
 					<p class="description"><?php _e( 'Disable post revisions.', 'disable-suite' ); ?></p>
-				</td>
-			</tr>
-
-			<tr valign="top">
-				<th scope="row"><?php _e( 'All Transient', 'disable-suite' ); ?></th>
-				<td>
-					<input type="checkbox" id ="ds_all_transient" name="ds_all_transient" value="1"<?php echo $this->checked_ds_all_transient; ?> />
-					<label for="ds_all_transient"><?php _e( 'disable', 'disable-suite' ); ?></label>
-					<p class="description"><?php _e( 'Delete all transient cache.', 'disable-suite' ); ?></p>
 				</td>
 			</tr>
 
